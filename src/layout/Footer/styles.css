@@ -1,0 +1,27 @@
+.footer-container {
+    width: 100vw;
+    padding: 10px 100px;
+    bottom: 0;
+    background-color: blue;
+}
+
+.footer-up {
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer-links-container {
+    display: flex;
+    gap: 20px;
+}
+
+.footer-social-container {
+    display: flex;
+    gap: 20px;
+}
+
+.footer-bottom {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
