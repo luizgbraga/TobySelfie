@@ -1,0 +1,150 @@
+.edit-page {
+    width: 100vw;
+    overflow-x: hidden;
+}
+
+.edit-body {
+    min-height: calc(100vh - 64px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.edit-logo {
+    margin: 3vw 0px 4vw 0px;
+    height: 7.2vw;
+}
+
+.edit-content {
+    display: flex;
+}
+
+.edit-your-image-container {
+    display: flex;
+    gap: 120px;
+    overflow: hidden
+}
+
+.your-image-container {
+    height: 50vh;
+    width: calc(50vh * 1080/1920);
+    position: relative;
+}
+
+.your-image-container .front-part {
+    position: absolute;
+    height: 50vh;
+    width: calc(50vh * 1080/1920);
+    left: 0;
+    z-index: 5;
+}
+
+.edit-tools-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.edit-tool-title {
+    font-size: 2vw;
+    font-weight: 600;
+    margin-bottom: 50px;
+}
+
+.edit-position-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.edit-position-buttons-container {
+    width: 260px;
+    height: 180px;
+    position: relative;
+    margin-bottom: 40px;
+}
+
+.edit-position-buttons-container img {
+    width: 80px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.edit-position-buttons-container img:hover {
+    filter: brightness(2);
+}
+
+.up-and-down {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: absolute;
+    left: 90px;
+}
+
+.up-and-down .arrow-up {
+    transform: rotate(270deg);
+}
+
+.up-and-down .arrow-down {
+    transform: rotate(90deg);
+}
+
+.left-and-right {
+    display: flex;
+    gap: 100px;
+    position: absolute;
+    top: 50px;
+}
+
+.left-and-right .arrow-left {
+    transform: rotate(180deg);
+}
+
+.edit-properties-sliders-container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px
+}
+
+.edit-buttons-container {
+    display: flex;
+    gap: 30px;
+    margin-top: 100px;
+}
+
+.edit-buttons-continue {
+    border: 0;
+    padding: 8px 24px;
+    border-radius: 12px;
+    font-size: 1vw;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    cursor: pointer;
+    color: #FFFFFF;
+    background-color: #651C32;
+    transition: all 0.25s ease-out;
+}
+
+.edit-buttons-back {
+    border: 0;
+    border: 1px solid #651C32;
+    padding: 8px 24px;
+    border-radius: 12px;
+    font-size: 1vw;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    cursor: pointer;
+    color: #651C32;
+    background-color: #FFFFFF;
+    transition: all 0.25s ease-out;
+}
+
+.edit-buttons-continue:hover {
+    transform: scale(1.1);
+    filter: brightness(1.5)
+}

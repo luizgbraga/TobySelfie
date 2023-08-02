@@ -1,0 +1,127 @@
+.upload-page {
+    width: 100vw;
+    overflow-x: hidden;
+}
+
+.upload-body {
+    min-height: calc(100vh - 64px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.upload-logo {
+    margin: 6vw 0px;
+}
+
+.upload-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.upload-title {
+    font-size: 2vw;
+    margin-bottom: 40px;
+}
+
+.upload-back {
+    font-size: 1.4vw;
+    margin-bottom: 40px;
+    text-decoration: underline;
+    color: #651C32;
+    cursor: pointer;
+}
+
+.upload-options-container {
+    display: flex;
+    gap: 60px;
+}
+
+.upload-options-container input {
+    display: none;
+}
+
+.upload-icon {
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+}
+
+.uploaded-buttons {
+    display: flex;
+    gap: 30px;
+}
+
+.uploaded-buttons-continue {
+    border: 0;
+    padding: 8px 24px;
+    border-radius: 12px;
+    font-size: 1vw;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    cursor: pointer;
+    color: #FFFFFF;
+    background-color: #651C32;
+    transition: all 0.25s ease-out;
+}
+
+.uploaded-buttons-back {
+    border: 0;
+    border: 1px solid #651C32;
+    padding: 8px 24px;
+    border-radius: 12px;
+    font-size: 1vw;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    cursor: pointer;
+    color: #651C32;
+    background-color: #FFFFFF;
+    transition: all 0.25s ease-out;
+}
+
+.uploaded-image-container {
+    height: 50vh;
+    width: calc(50vh * 1080/1920);
+    margin-bottom: 40px;
+}
+
+.uploaded-buttons-continue:hover {
+    transform: scale(1.1);
+    filter: brightness(1.5)
+}
+
+.webcam-container {
+    height: 50vh;
+    width: calc(50vh * 1080/1920);
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.webcam-capture-container {
+    align-self: end;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    position: absolute;
+    bottom: 16px;
+    z-index: 10;
+    background-color: #651C32;
+    padding: 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: .1s;
+}
+
+.webcam-capture-container:hover {
+    filter: brightness(1.5);
+    transform: scale(1.02);
+}
+
+.webcam-capture-container img {
+    width: 32px;
+}

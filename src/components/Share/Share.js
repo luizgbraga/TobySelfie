@@ -6,13 +6,16 @@ import Footer from '../../layout/Footer/Footer';
 
 import { useNavigate } from 'react-router-dom';
 
+import juntosplus from '../../assets/images/juntosplus.png';
+
 function Share({ image }) {
     const navigate = useNavigate();
     return(
         <div className="share-page">
             <div className="share-page-body">
-                <p className="share-page-logo">Juntos+</p>
+                <img className="edit-logo" alt="logo" src={juntosplus} />
                 <div className="share-page-content">
+                    <img src={image} />
                     <button>Compartilhar</button>
                     <button onClick={() => navigate('/upload')}>Tirar outra</button>
                 </div>

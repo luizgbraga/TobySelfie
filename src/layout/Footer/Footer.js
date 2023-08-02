@@ -2,23 +2,25 @@ import React from 'react';
 
 import './styles.css';
 
+import facebook from '../../assets/icons/facebook.png';
+import instagram from '../../assets/icons/instagram.png';
+
 function Footer() {
     return(
         <div className="footer-container">
             <div className="footer-up">
                 <div className="footer-links-container">
-                    <p>1</p>
-                    <p>2</p>
-                    <p>3</p>
+                    <p>Política de Privacidade</p>
+                    <p>Termos de Uso</p>
+                    <p>Gerenciar Preferências</p>
                 </div>
                 <div className="footer-social-container">
-                    <p>a</p>
-                    <p>b</p>
-                    <p>c</p>
+                    <img src={facebook} alt="fb-icon" />
+                    <img src={instagram} alt="ig-icon" />
                 </div>
             </div>
             <div className="footer-bottom">
-                <p>Todos direitos reservados</p>
+                <p>Coca-Cola FEMSA. Todos direitos reservados</p>
             </div>
         </div>
     )

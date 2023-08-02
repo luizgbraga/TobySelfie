@@ -1,0 +1,45 @@
+.welcome-page-body {
+    min-height: calc(100vh - 64px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.welcome-page-logo {
+    margin: 6vw 0px;
+}
+
+.welcome-page-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.welcome-page-title {
+    font-size: 4vw;
+    font-weight: 700;
+}
+
+.welcome-page-subtitle {
+    font-size: 2vw;
+    margin-bottom: 100px;
+}
+
+.welcome-page-buton {
+    border: 0;
+    padding: 12px 32px;
+    border-radius: 12px;
+    font-size: 1.5vw;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    cursor: pointer;
+    color: #FFFFFF;
+    background-color: #651C32;
+    transition: all 0.25s ease-out;
+}
+
+.welcome-page-buton:hover {
+    transform: scale(1.1);
+    filter: brightness(1.5)
+}

@@ -2,7 +2,8 @@
     width: 100vw;
     padding: 10px 100px;
     bottom: 0;
-    background-color: blue;
+    background-color: #DA291C;
+    height: 64px;
 }
 
 .footer-up {
@@ -15,13 +16,30 @@
     gap: 20px;
 }
 
+.footer-links-container p {
+    color: #FFFFFF;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
 .footer-social-container {
     display: flex;
     gap: 20px;
+}
+
+.footer-social-container img {
+    width: 20px;
+    cursor: pointer;
 }
 
 .footer-bottom {
     width: 100%;
     display: flex;
     justify-content: center;
+}
+
+.footer-bottom p {
+    color: #FFFFFF;
+    font-weight: 300;
 }
