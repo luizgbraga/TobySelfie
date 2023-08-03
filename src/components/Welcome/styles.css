@@ -25,7 +25,7 @@
     margin-bottom: 100px;
 }
 
-.welcome-page-buton {
+.welcome-page-button {
     border: 0;
     padding: 12px 32px;
     border-radius: 12px;
@@ -39,7 +39,25 @@
     transition: all 0.25s ease-out;
 }
 
-.welcome-page-buton:hover {
+.welcome-page-button:hover {
     transform: scale(1.1);
     filter: brightness(1.5)
+}
+
+@media (max-width: 600px) {
+    .welcome-page-title {
+        font-size: 6vw;
+        font-weight: 700;
+    }
+    
+    .welcome-page-subtitle {
+        font-size: 4vw;
+        margin-bottom: 100px;
+    }    
+
+    .welcome-page-button {
+        padding: 10px 18px;
+        font-size: 4vw;
+    }
+
 }

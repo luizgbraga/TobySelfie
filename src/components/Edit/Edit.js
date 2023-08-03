@@ -33,9 +33,6 @@ function Edit({ image, croppedImage, setCroppedImage, loading, setLoading }) {
       }
     })
     .then(response => {
-      console.log(response);
-      console.log(response.data);
-      console.log(response.data.data.image);
       setCroppedImage(response.data.data.image);
       setLoading(false);
     })

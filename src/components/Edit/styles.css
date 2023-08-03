@@ -148,3 +148,29 @@
     transform: scale(1.1);
     filter: brightness(1.5)
 }
+
+@media (max-width: 600px) {
+    .edit-logo {
+        height: 16vw;
+        margin: 8vw 0px 16vw 0px;
+    }
+
+    .edit-your-image-container {
+        flex-direction: column;
+        gap: 50px;
+    }
+
+    .edit-tool-title {
+        font-size: 6vw;
+    }
+    
+    .edit-buttons-continue {
+        padding: 10px 18px;
+        font-size: 4vw;
+    }
+
+    .edit-buttons-back {
+        padding: 10px 18px;
+        font-size: 4vw;
+    }
+}

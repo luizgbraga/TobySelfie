@@ -125,3 +125,25 @@
 .webcam-capture-container img {
     width: 32px;
 }
+
+@media (max-width: 600px) {
+    .upload-title {
+        font-size: 4vw;
+    }
+
+    .upload-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .uploaded-buttons-continue {
+        padding: 10px 18px;
+        font-size: 4vw;
+    }
+    
+    .uploaded-buttons-back {
+        padding: 10px 18px;
+        font-size: 4vw;
+    }
+    
+}

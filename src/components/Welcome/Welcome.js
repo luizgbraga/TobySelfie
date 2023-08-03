@@ -17,7 +17,7 @@ function Welcome() {
                 <div className="welcome-page-content">
                     <p className="welcome-page-title">Gerador de Selfies</p>
                     <p className="welcome-page-subtitle">Bem-vindo! Gere sua selfie com o Toby</p>
-                    <button className="welcome-page-buton" onClick={() => navigate('/upload')}>Iniciar</button>
+                    <button className="welcome-page-button" onClick={() => navigate('/upload')}>Iniciar</button>
                 </div>
             </div>
             <Footer />
