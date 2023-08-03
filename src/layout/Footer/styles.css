@@ -21,7 +21,7 @@
     cursor: pointer;
     text-transform: uppercase;
     font-weight: 600;
-    font-size: 0.9vw;
+    font-size: 0.85vw;
 }
 
 .footer-social-container {
@@ -44,8 +44,8 @@
 .footer-bottom p {
     color: #FFFFFF;
     font-weight: 300;
-    font-size: 0.8vw;
-    margin-top: 0.4vw;
+    font-size: 0.65vw;
+    margin-top: 0.1vw;
 }
 
 @media (max-width: 600px) {

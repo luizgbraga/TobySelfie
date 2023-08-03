@@ -16,8 +16,10 @@ function Share({ image }) {
                 <img className="edit-logo" alt="logo" src={juntosplus} />
                 <div className="share-page-content">
                     <img src={image} />
-                    <button>Compartilhar</button>
-                    <button onClick={() => navigate('/upload')}>Tirar outra</button>
+                    <div className="share-buttons-container">
+                        <button className="share-buttons-back" onClick={() => navigate('/upload')}>Tirar outra</button>
+                        <button className="share-buttons-continue">Compartilhar</button>
+                    </div>
                 </div>
             </div>
             <Footer />

@@ -8,6 +8,7 @@ import Footer from '../../layout/Footer/Footer';
 import camera from '../../assets/icons/camera.png';
 import upload from '../../assets/icons/upload.png';
 import cam from '../../assets/icons/capture.png';
+import back from '../../assets/icons/back.png';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -46,22 +47,15 @@ function Upload({ image, setImage, imagePreview, setImagePreview }) {
     }, []);
 
     function base64ToFile(base64String, fileName, mimeType) {
-        // Remove the data URL prefix if it exists
         const base64Data = base64String.replace(/^data:image\/(png|jpeg|jpg);base64,/, '');
-      
-        // Convert the Base64 string to binary data
         const binaryData = atob(base64Data);
-      
-        // Create a Uint8Array to hold the binary data
+
         const byteArray = new Uint8Array(binaryData.length);
         for (let i = 0; i < binaryData.length; i++) {
           byteArray[i] = binaryData.charCodeAt(i);
         }
-      
-        // Create a Blob from the binary data
+
         const blob = new Blob([byteArray], { type: mimeType || 'image/jpeg' });
-      
-        // Create a File from the Blob
         return new File([blob], fileName, { type: mimeType || 'image/jpeg' });
       }
 
@@ -72,7 +66,6 @@ function Upload({ image, setImage, imagePreview, setImagePreview }) {
       const file = base64ToFile(imageSrc, 'myImage.jpg', 'image/jpeg');
       setImagePreview(imageSrc);
       setImage(file);
-      console.log(file)
       setCapture(false);
       setNext(true);
     }, [webcamRef, setImage]);
@@ -80,7 +73,12 @@ function Upload({ image, setImage, imagePreview, setImagePreview }) {
     return(
         <div className="upload-page">
             <div className="upload-body">
-                <img className="edit-logo" alt="logo" src={juntosplus} />
+                {
+                    !capture && !next ?
+                    <img className="edit-logo" alt="logo" src={juntosplus} />
+                    :
+                    <img className="edit-logo-little" alt="logo" src={juntosplus} />
+                }
                 {
                     next ?
                     <div className="upload-content">
@@ -99,7 +97,9 @@ function Upload({ image, setImage, imagePreview, setImagePreview }) {
                     <div className="upload-content">
                         {
                             capture ?
-                            <p className="upload-back" onClick={() => setCapture(false)}>Voltar</p>
+                            <div className="back-container" onClick={() => setCapture(false)}>
+                                <img src={back} className="back-icon" alt="return" />
+                            </div>
                             :
                             <p className="upload-title">Tire uma foto ou faça o upload</p>
                         }
@@ -119,18 +119,22 @@ function Upload({ image, setImage, imagePreview, setImagePreview }) {
                             <div className="upload-options-container">
                                 {
                                     width <= 768 ?
-                                    <>
+                                    <div className="upload-option-container">
                                         <label htmlFor="upload-image">
                                             <img src={camera} className="upload-icon" alt="camera" />
                                         </label>
                                         <input accept='image/*' id='capture-icon' type='file' capture='environment' onChange={handleFile} />
-                                    </>
+                                    </div>
                                     :
-                                    <img src={camera} className="upload-icon" alt="camera" onClick={() => setCapture(true)} />
+                                    <div className="upload-option-container">
+                                        <img src={camera} className="upload-icon" alt="camera" onClick={() => setCapture(true)} />
+                                    </div>
                                 }
-                                <label htmlFor="upload-image">
-                                    <img src={upload} className="upload-icon" alt="upload" />
-                                </label>
+                                <div className="upload-option-container">
+                                    <label htmlFor="upload-image">
+                                        <img src={upload} className="upload-icon" alt="upload" />
+                                    </label>
+                                </div>
                                 <input type="file" id="upload-image" onChange={handleFile} />
                             </div>
                         }

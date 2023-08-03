@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useRef } from 'react'; // import useEffect
+import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
+import html2canvas from 'html2canvas';
 
-import PulseLoader from "react-spinners/PulseLoader";
 import Slider from './Slider';
 
 import './styles.css';
@@ -14,8 +14,10 @@ import juntosplus from '../../assets/images/juntosplus.png';
 import front from '../../assets/images/front.png';
 import back from '../../assets/images/back.png';
 import arrow from '../../assets/icons/arrow-right.png';
+import loader from '../../assets/icons/loader.svg';
+import you from '../../assets/cropped/image.png'
 
-function Edit({ image, croppedImage, setCroppedImage, loading, setLoading }) {
+function Edit({ image, setCroppedImage, loading, setLoading }) {
   const navigate = useNavigate();
 
   const exportRef = useRef();
@@ -33,11 +35,19 @@ function Edit({ image, croppedImage, setCroppedImage, loading, setLoading }) {
       }
     })
     .then(response => {
-      setCroppedImage(response.data.data.image);
-      setLoading(false);
+      axios.post('http://localhost:3001/save-image', { url: response.data.data.image })
+        .then(() => {
+          setCroppedImage('http://localhost:3001/download-image');
+          setLoading(false);
+        })
+        .catch(error => {
+          console.error(error);
+          setLoading(false);
+        });
     })
     .catch(error => {
       console.error(error);
+      setLoading(false);
     });
   }, [image]);
 
@@ -47,22 +57,24 @@ function Edit({ image, croppedImage, setCroppedImage, loading, setLoading }) {
   const [addTop, setAddTop] = useState(0);
 
   const handleContinue = () => {
-    navigate('/share');
+    const exportRef = document.querySelector('.your-image-container-download');
+    html2canvas(exportRef).then((canvas) => {
+        const exportedImage = canvas.toDataURL("image/png");
+        const link = document.createElement("a");
+        link.href = exportedImage;
+        link.download = 'image.png';
+        link.click();
+    });
   }
 
   return(
     <div className="edit-page">
       <div className="edit-body">
-        <img className="edit-logo" alt="logo" src={juntosplus} />
+        <img className="edit-logo-little" alt="logo" src={juntosplus} />
         <div className="edit-content">
           {
             loading ?
-            <PulseLoader
-              color={'#651C32'}
-              loading={loading}
-              size={32}
-              speedMultiplier={0.5}
-            />
+            <img src={loader} style={{ width: '140px' }} alt="loading" />
             :
             <div className="edit-your-image-container">
               <div className="your-image-container" style={{
@@ -72,7 +84,7 @@ function Edit({ image, croppedImage, setCroppedImage, loading, setLoading }) {
                 position: 'relative'
               }}>
                 <div className="your-pic-container" ref={exportRef} style={{
-                  backgroundImage: `url(${croppedImage})`,
+                  backgroundImage: `url(${you})`,
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
                   transform: `scale(${zoom[0]/50}) rotate(${(rotate[0] - 50) * 3.6}deg)`,
@@ -85,6 +97,28 @@ function Edit({ image, croppedImage, setCroppedImage, loading, setLoading }) {
                   height: '70%'
                 }} />
                 <img src={front} alt="front" className="front-part" />
+              </div>
+              <div className="your-image-container-download" style={{
+                backgroundImage: `url(${back})`,
+                backgroundSize: 'contain',
+                backgroundPosition: 'center',
+                position: 'absolute',
+                left: '-400vh',
+              }}>
+                <div className="your-pic-container-download" ref={exportRef} style={{
+                  backgroundImage: `url(${you})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  transform: `scale(${zoom[0]/50}) rotate(${(rotate[0] - 50) * 3.6}deg)`,
+                  left: '50%',
+                  bottom: `calc(15% + ${addTop}px)`,
+                  marginLeft: `calc(-35% + ${addRight}px)`,
+                  position: 'absolute',
+                  zIndex: '2',
+                  width: '70%',
+                  height: '70%'
+                }} />
+                <img src={front} alt="front" className="front-part-download" />
               </div>
               <div className="edit-tools-container">
                 <div className="edit-position-container">
@@ -105,7 +139,7 @@ function Edit({ image, croppedImage, setCroppedImage, loading, setLoading }) {
                 </div>
                 <div className="edit-buttons-container">
                   <button onClick={() => navigate('/upload')} className="edit-buttons-back">Voltar</button>
-                  <button onClick={handleContinue} className="edit-buttons-continue">Continuar</button>
+                  <button onClick={handleContinue} className="edit-buttons-continue">Baixar</button>
                 </div>
               </div>
             </div>

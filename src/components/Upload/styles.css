@@ -1,6 +1,13 @@
 .upload-page {
     width: 100vw;
     overflow-x: hidden;
+    background-color:hsla(12,100%,93%,1);
+    background-image:
+    radial-gradient(at 36% 93%, hsla(336,100%,21%,0.21) 0px, transparent 50%),
+    radial-gradient(at 16% 18%, hsla(9,49%,89%,1) 0px, transparent 50%),
+    radial-gradient(at 79% 32%, hsla(76,0%,100%,1) 0px, transparent 50%),
+    radial-gradient(at 98% 8%, hsla(0,77%,48%,0.47) 0px, transparent 50%),
+    radial-gradient(at 26% 85%, hsla(9,48%,89%,1) 0px, transparent 50%);
 }
 
 .upload-body {
@@ -8,6 +15,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.edit-logo-little {
+    margin: 1.5vw 0px 1.8vw 0px;
+    height: 3.4vw;
 }
 
 .upload-logo {
@@ -18,6 +30,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    box-shadow:30px 30px 0px 0px rgba(101,28,50,1);
+    border: 5px solid rgba(101,28,50,1);
+    background-color: #F8E2DE;
+    padding: 60px 100px;
+    border-radius: 20px;
 }
 
 .upload-title {
@@ -42,9 +59,44 @@
     display: none;
 }
 
+.upload-option-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #651C32;
+    padding: 8px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.upload-option-container:hover {
+    transform: scale(1.02);
+    filter: brightness(1.2);
+}
+
+.back-container {
+    background-color: #651C32;
+    padding: 10px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: .2s;
+    margin-bottom: 1vw;
+}
+
+.back-container:hover {
+    transform: scale(1.02);
+    filter: brightness(1.2);
+}
+
+.back-icon {
+    width: 30px;
+    height: 30px;
+}
+
 .upload-icon {
-    width: 80px;
-    height: 80px;
+    width: 42px;
+    height: 42px;
     cursor: pointer;
 }
 
@@ -83,8 +135,8 @@
 }
 
 .uploaded-image-container {
-    height: 50vh;
-    width: calc(50vh * 1080/1920);
+    height: 40vh;
+    width: calc(40vh * 1080/1920);
     margin-bottom: 40px;
 }
 
@@ -94,8 +146,8 @@
 }
 
 .webcam-container {
-    height: 50vh;
-    width: calc(50vh * 1080/1920);
+    height: 45vh;
+    width: calc(45vh * 1080/1920);
     display: flex;
     justify-content: center;
     overflow: hidden;
@@ -123,17 +175,22 @@
 }
 
 .webcam-capture-container img {
-    width: 32px;
+    width: 36px;
 }
 
 @media (max-width: 600px) {
     .upload-title {
-        font-size: 4vw;
+        font-size: 5vw;
     }
 
     .upload-icon {
         width: 40px;
         height: 40px;
+    }
+
+    .edit-logo-little {
+        margin: 8vw 0px 6vw 0px;
+        height: 16vw;
     }
 
     .uploaded-buttons-continue {
@@ -144,6 +201,13 @@
     .uploaded-buttons-back {
         padding: 10px 18px;
         font-size: 4vw;
+    }
+
+    .upload-content {
+        box-shadow: 8px 8px 0px 0px rgba(101,28,50,1);
+        padding: 32px 18px;
+        border-radius: 16px;
+        position: relative;
     }
     
 }
