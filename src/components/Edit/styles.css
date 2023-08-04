@@ -15,6 +15,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow: hidden;
 }
 
 .edit-logo {
@@ -29,6 +30,7 @@
     background-color: #F8E2DE;
     padding: 60px 100px;
     border-radius: 20px;
+    overflow: hidden;
 }
 
 .edit-your-image-container {
@@ -52,17 +54,16 @@
 }
 
 .your-image-container-download {
-    height: 200vh;
-    width: calc(200vh * 1080/1920);
+    height: 90vh;
+    width: calc(90vh * 1080/1920);
     position: relative;
     border-radius: 8px;
 }
 
 .your-image-container-download .front-part-download {
     position: absolute;
-    height: 200vh;
-    width: calc(200vh * 1080/1920);
-    left: 0;
+    height: 90vh;
+    width: calc(90vh * 1080/1920);
     z-index: 5;
 }
 

@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
+import { toPng } from 'html-to-image';
 import axios from 'axios';
-import html2canvas from 'html2canvas';
 
 import Slider from './Slider';
 
@@ -15,9 +15,8 @@ import front from '../../assets/images/front.png';
 import back from '../../assets/images/back.png';
 import arrow from '../../assets/icons/arrow-right.png';
 import loader from '../../assets/icons/loader.svg';
-import you from '../../assets/cropped/image.png'
 
-function Edit({ image, setCroppedImage, loading, setLoading }) {
+function Edit({ image, croppedImage, setCroppedImage, loading, setLoading }) {
   const navigate = useNavigate();
 
   const exportRef = useRef();
@@ -35,15 +34,9 @@ function Edit({ image, setCroppedImage, loading, setLoading }) {
       }
     })
     .then(response => {
-      axios.post('http://localhost:3001/save-image', { url: response.data.data.image })
-        .then(() => {
-          setCroppedImage('http://localhost:3001/download-image');
-          setLoading(false);
-        })
-        .catch(error => {
-          console.error(error);
-          setLoading(false);
-        });
+      console.log(response.data.data.image)
+      setCroppedImage(response.data.data.image);
+      setLoading(false);
     })
     .catch(error => {
       console.error(error);
@@ -56,16 +49,23 @@ function Edit({ image, setCroppedImage, loading, setLoading }) {
   const [addRight, setAddRight] = useState(0);
   const [addTop, setAddTop] = useState(0);
 
-  const handleContinue = () => {
-    const exportRef = document.querySelector('.your-image-container-download');
-    html2canvas(exportRef).then((canvas) => {
-        const exportedImage = canvas.toDataURL("image/png");
-        const link = document.createElement("a");
-        link.href = exportedImage;
-        link.download = 'image.png';
-        link.click();
-    });
-  }
+  const handleContinue = useCallback(() => {
+    if (exportRef.current === null) {
+      console.log('ue')
+      return
+    }
+
+    toPng(exportRef.current, { cacheBust: true, })
+      .then((dataUrl) => {
+        const link = document.createElement('a')
+        link.download = 'you-and-toby.png'
+        link.href = dataUrl
+        link.click()
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }, [exportRef])
 
   return(
     <div className="edit-page">
@@ -83,13 +83,13 @@ function Edit({ image, setCroppedImage, loading, setLoading }) {
                 backgroundPosition: 'center',
                 position: 'relative'
               }}>
-                <div className="your-pic-container" ref={exportRef} style={{
-                  backgroundImage: `url(${you})`,
+                <div className="your-pic-container" style={{
+                  backgroundImage: `url(${croppedImage})`,
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
                   transform: `scale(${zoom[0]/50}) rotate(${(rotate[0] - 50) * 3.6}deg)`,
                   left: '50%',
-                  bottom: `calc(15% + ${addTop}px)`,
+                  bottom: `calc(20% + ${addTop}px)`,
                   marginLeft: `calc(-35% + ${addRight}px)`,
                   position: 'absolute',
                   zIndex: '2',
@@ -98,15 +98,17 @@ function Edit({ image, setCroppedImage, loading, setLoading }) {
                 }} />
                 <img src={front} alt="front" className="front-part" />
               </div>
-              <div className="your-image-container-download" style={{
+              <div className="your-image-container-download" ref={exportRef} style={{
                 backgroundImage: `url(${back})`,
                 backgroundSize: 'contain',
                 backgroundPosition: 'center',
                 position: 'absolute',
-                left: '-400vh',
+                left: '0',
+                top: '0',
+                zIndex: '-1'
               }}>
-                <div className="your-pic-container-download" ref={exportRef} style={{
-                  backgroundImage: `url(${you})`,
+                <div className="your-pic-container-download" style={{
+                  backgroundImage: `url(${croppedImage})`,
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
                   transform: `scale(${zoom[0]/50}) rotate(${(rotate[0] - 50) * 3.6}deg)`,
