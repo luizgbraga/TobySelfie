@@ -18,6 +18,8 @@ import loader from '../../assets/icons/loader.svg';
 
 function Edit({ image, croppedImage, setCroppedImage, loading, setLoading }) {
   const navigate = useNavigate();
+  const [download, setDownload] = useState(false);
+  const [result, setResult] = useState('');
 
   const exportRef = useRef();
 
@@ -60,16 +62,14 @@ function Edit({ image, croppedImage, setCroppedImage, loading, setLoading }) {
         const link = document.createElement('a');
         link.href = dataUrl;
         link.download = 'you-and-toby.png';
-        
+
         // Detect iOS devices
         const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
         
         if (iOS) {
-          // iOS doesn't support programmatically triggered downloads
-          // Open the image in a new window/tab instead
-          const newWindow = window.open();
-          newWindow.document.write(`<img src="${dataUrl}" />`);
-          newWindow.document.write('<p>Press and hold the image to save it to your device.</p>');
+          setDownload(true);
+          setResult(dataUrl);
+          console.log(dataUrl);
         } else {
           // For other devices, trigger download
           document.body.appendChild(link);
@@ -81,8 +81,23 @@ function Edit({ image, croppedImage, setCroppedImage, loading, setLoading }) {
         console.log(err);
       })
   }, [exportRef])
-  
-  
+
+  if (download) {
+    return(
+      <div className="edit-page">
+      <div className="edit-body">
+        <img className="edit-logo-little" alt="logo" src={juntosplus} />
+        <div className="edit-content">
+          <img src={result} alt="result" className="your-image-container" />
+        </div>
+        <p style={{
+          padding: '20px 20vw',
+          textAlign: 'center'
+        }}>Clique e segure na imagem para compartilhar ou baixar!</p>
+        </div>
+        </div>
+    )
+  }
 
   return(
     <div className="edit-page">
