@@ -54,18 +54,31 @@ function Edit({ image, croppedImage, setCroppedImage, loading, setLoading }) {
       console.log('ue')
       return
     }
-
+  
     toPng(exportRef.current, { cacheBust: true, })
       .then((dataUrl) => {
-        const link = document.createElement('a')
-        link.download = 'you-and-toby.png'
-        link.href = dataUrl
-        link.click()
+        // Convert DataURL to Blob
+        fetch(dataUrl)
+          .then(res => res.blob())
+          .then(blob => {
+            // Create a Blob URL
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'you-and-toby.png';
+            // Append link to body
+            document.body.appendChild(link);
+            // Trigger click event
+            link.click();
+            // Clean up DOM
+            document.body.removeChild(link);
+          });
       })
       .catch((err) => {
         console.log(err)
       })
   }, [exportRef])
+  
 
   return(
     <div className="edit-page">
@@ -77,7 +90,7 @@ function Edit({ image, croppedImage, setCroppedImage, loading, setLoading }) {
             <img src={loader} style={{ width: '140px' }} alt="loading" />
             :
             <div className="edit-your-image-container">
-              <div className="your-image-container" ref={exportRef} style={{
+              <div className="your-image-container" style={{
                 backgroundImage: `url(${back})`,
                 backgroundSize: 'contain',
                 backgroundPosition: 'center',
@@ -98,7 +111,7 @@ function Edit({ image, croppedImage, setCroppedImage, loading, setLoading }) {
                 }} />
                 <img src={front} alt="front" className="front-part" />
               </div>
-              <div className="your-image-container-download" style={{
+              <div className="your-image-container-download" ref={exportRef} style={{
                 backgroundImage: `url(${back})`,
                 backgroundSize: 'contain',
                 backgroundPosition: 'center',
