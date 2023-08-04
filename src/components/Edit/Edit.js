@@ -57,27 +57,31 @@ function Edit({ image, croppedImage, setCroppedImage, loading, setLoading }) {
   
     toPng(exportRef.current, { cacheBust: true, })
       .then((dataUrl) => {
-        // Convert DataURL to Blob
-        fetch(dataUrl)
-          .then(res => res.blob())
-          .then(blob => {
-            // Create a Blob URL
-            const url = URL.createObjectURL(blob);
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = 'you-and-toby.png';
-            // Append link to body
-            document.body.appendChild(link);
-            // Trigger click event
-            link.click();
-            // Clean up DOM
-            document.body.removeChild(link);
-          });
+        const link = document.createElement('a');
+        link.href = dataUrl;
+        link.download = 'you-and-toby.png';
+        
+        // Detect iOS devices
+        const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        
+        if (iOS) {
+          // iOS doesn't support programmatically triggered downloads
+          // Open the image in a new window/tab instead
+          const newWindow = window.open();
+          newWindow.document.write(`<img src="${dataUrl}" />`);
+          newWindow.document.write('<p>Press and hold the image to save it to your device.</p>');
+        } else {
+          // For other devices, trigger download
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        }
       })
       .catch((err) => {
-        console.log(err)
+        console.log(err);
       })
   }, [exportRef])
+  
   
 
   return(
