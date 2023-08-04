@@ -77,7 +77,7 @@ function Edit({ image, croppedImage, setCroppedImage, loading, setLoading }) {
             <img src={loader} style={{ width: '140px' }} alt="loading" />
             :
             <div className="edit-your-image-container">
-              <div className="your-image-container" style={{
+              <div className="your-image-container" ref={exportRef} style={{
                 backgroundImage: `url(${back})`,
                 backgroundSize: 'contain',
                 backgroundPosition: 'center',
@@ -98,7 +98,7 @@ function Edit({ image, croppedImage, setCroppedImage, loading, setLoading }) {
                 }} />
                 <img src={front} alt="front" className="front-part" />
               </div>
-              <div className="your-image-container-download" ref={exportRef} style={{
+              <div className="your-image-container-download" style={{
                 backgroundImage: `url(${back})`,
                 backgroundSize: 'contain',
                 backgroundPosition: 'center',
