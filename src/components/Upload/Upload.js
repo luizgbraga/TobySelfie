@@ -16,7 +16,6 @@ import juntosplus from '../../assets/images/juntosplus.png';
 
 function Upload({ image, setImage, imagePreview, setImagePreview }) {
     const [width, setWidth] = useState(window.innerWidth);
-    const [height, setHeight] = useState(window.innerHeight);
     const [next, setNext] = useState(false);
     const [capture, setCapture] = useState(false);
     const navigate = useNavigate();
@@ -36,7 +35,6 @@ function Upload({ image, setImage, imagePreview, setImagePreview }) {
 
     const handleWindowSizeChange = () => {
         setWidth(window.innerWidth);
-        setHeight(window.innerHeight);
     };
 
     useEffect(() => {
@@ -68,7 +66,7 @@ function Upload({ image, setImage, imagePreview, setImagePreview }) {
       setImage(file);
       setCapture(false);
       setNext(true);
-    }, [webcamRef, setImage]);
+    }, [webcamRef, setImage, setImagePreview]);
     
     return(
         <div className="upload-page">

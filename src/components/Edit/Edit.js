@@ -42,7 +42,7 @@ function Edit({ image, croppedImage, setCroppedImage, loading, setLoading }) {
       console.error(error);
       setLoading(false);
     });
-  }, [image]);
+  }, [image, setCroppedImage, setLoading]);
 
   const [zoom, setZoom] = useState([50]);
   const [rotate, setRotate] = useState([50]);
