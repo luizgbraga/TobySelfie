@@ -89,14 +89,9 @@ function Edit({
         <div className="edit-body">
           <img className="edit-logo-little" alt="logo" src={juntosplus} />
           <div className="edit-content">
-            <div
-              className="your-image-container"
-              style={{
-                backgroundImage: `url(${resultUrl})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-              }}
-            />
+            <div>
+              <img src={resultUrl} className="your-image-container" alt="result" />
+            </div>
           </div>
           <p style={{
             padding: '40px 12vw',
@@ -159,7 +154,7 @@ function Edit({
                       position: 'absolute',
                       left: '0',
                       top: '0',
-                      zIndex: '-1',
+                      zIndex: '-5',
                     }}
                   >
                     <div
@@ -173,7 +168,7 @@ function Edit({
                         bottom: `calc(15% + ${addTop}px)`,
                         marginLeft: `calc(-35% + ${addRight}px)`,
                         position: 'absolute',
-                        zIndex: '2',
+                        zIndex: '-3',
                         width: '70%',
                         height: '70%',
                       }}

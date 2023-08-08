@@ -64,6 +64,7 @@
     position: absolute;
     height: 90vh;
     width: calc(90vh * 1080/1920);
+    z-index: -1;
 }
 
 .edit-tools-container {
