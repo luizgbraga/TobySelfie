@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, {
@@ -52,17 +53,6 @@ function Edit({
   const [rotate, setRotate] = useState([50]);
   const [addRight, setAddRight] = useState(0);
   const [addTop, setAddTop] = useState(0);
-
-  // const base64ToFile = (base64String, fileName, mimeType) => {
-  //   const base64Data = base64String.replace(/^data:image\/(png|jpeg|jpg);base64,/, '');
-  //   const binaryData = atob(base64Data);
-  //   const byteArray = new Uint8Array(binaryData.length);
-  //   for (let i = 0; i < binaryData.length; i += 1) {
-  //     byteArray[i] = binaryData.charCodeAt(i);
-  //   }
-  //   const blob = new Blob([byteArray], { type: mimeType || 'image/jpeg' });
-  //   return new File([blob], fileName, { type: mimeType || 'image/jpeg' });
-  // };
 
   const handleContinue = useCallback(() => {
     toPng(exportRef.current, { cacheBust: true })
