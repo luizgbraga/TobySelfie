@@ -53,25 +53,25 @@ function Edit({
   const [addRight, setAddRight] = useState(0);
   const [addTop, setAddTop] = useState(0);
 
-  const base64ToFile = (base64String, fileName, mimeType) => {
-    const base64Data = base64String.replace(/^data:image\/(png|jpeg|jpg);base64,/, '');
-    const binaryData = atob(base64Data);
-    const byteArray = new Uint8Array(binaryData.length);
-    for (let i = 0; i < binaryData.length; i += 1) {
-      byteArray[i] = binaryData.charCodeAt(i);
-    }
-    const blob = new Blob([byteArray], { type: mimeType || 'image/jpeg' });
-    return new File([blob], fileName, { type: mimeType || 'image/jpeg' });
-  };
+  // const base64ToFile = (base64String, fileName, mimeType) => {
+  //   const base64Data = base64String.replace(/^data:image\/(png|jpeg|jpg);base64,/, '');
+  //   const binaryData = atob(base64Data);
+  //   const byteArray = new Uint8Array(binaryData.length);
+  //   for (let i = 0; i < binaryData.length; i += 1) {
+  //     byteArray[i] = binaryData.charCodeAt(i);
+  //   }
+  //   const blob = new Blob([byteArray], { type: mimeType || 'image/jpeg' });
+  //   return new File([blob], fileName, { type: mimeType || 'image/jpeg' });
+  // };
 
   const handleContinue = useCallback(() => {
     toPng(exportRef.current, { cacheBust: true })
       .then((dataBase64) => {
         if (isMobile) {
           setDownload(true);
-          const file = base64ToFile(dataBase64, 'you-and-toby.jpg', 'image/jpeg');
-          const url = URL.createObjectURL(file);
-          setResultUrl(url);
+          // const file = base64ToFile(dataBase64, 'you-and-toby.jpg', 'image/jpeg');
+          // const url = URL.createObjectURL(file);
+          setResultUrl(dataBase64);
         } else {
           const link = document.createElement('a');
           link.href = dataBase64;
