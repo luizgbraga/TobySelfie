@@ -16,8 +16,8 @@ function Welcome() {
         <img className="edit-logo" alt="logo" src={juntosplus} />
         <div className="welcome-page-content">
           <img className="toby" alt="toby" src={toby} />
-          <p className="welcome-page-title">Gerador de Selfies</p>
-          <p className="welcome-page-subtitle">Bem-vindo! Gere sua selfie com o Toby</p>
+          <p className="welcome-page-title">Generador de Selfies</p>
+          <p className="welcome-page-subtitle">¡Bienvenido! Genera tu selfie con Toby</p>
           <button type="button" className="welcome-page-button" onClick={() => navigate('/upload')}>Iniciar</button>
         </div>
       </div>

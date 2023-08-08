@@ -2,6 +2,8 @@
 import React from 'react';
 import { Range } from 'react-range';
 
+// import plus from '../../assets/icons/plus.png';
+
 function Slider({ values, setValues }) {
   return (
     <Range

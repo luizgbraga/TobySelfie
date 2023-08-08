@@ -10,9 +10,9 @@ function Footer() {
     <div className="footer-container">
       <div className="footer-up">
         <div className="footer-links-container">
-          <p>Política de Privacidade</p>
-          <p>Termos de Uso</p>
-          <p>Gerenciar Preferências</p>
+          <p>Política de Privacidad</p>
+          <p>Términos de Uso</p>
+          <p>Gestionar Preferencias</p>
         </div>
         <div className="footer-social-container">
           <img src={facebook} alt="fb-icon" />
@@ -20,7 +20,7 @@ function Footer() {
         </div>
       </div>
       <div className="footer-bottom">
-        <p>Coca-Cola FEMSA. Todos direitos reservados</p>
+        <p>Coca-Cola FEMSA. Todos los derechos reservados.</p>
       </div>
     </div>
   );

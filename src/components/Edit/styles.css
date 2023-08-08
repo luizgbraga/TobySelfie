@@ -43,6 +43,7 @@
     width: calc(50vh * 1080/1920);
     position: relative;
     border-radius: 8px;
+    overflow: hidden;
 }
 
 .your-image-container .front-part {
@@ -120,6 +121,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    position: relative;
 }
 
 .edit-position-buttons-container {
@@ -252,6 +254,39 @@
 .edit-background-container {
     display: flex;
     gap: 2vw;
+}
+
+.plus-icon {
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    bottom: 29px;
+    right: -30px;
+}
+
+.minus-icon {
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    bottom: 29px;
+    left: -30px;
+}
+
+.rotate-right-icon {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    bottom: -9px;
+    right: -30px;
+    transform: scaleX(-1);
+}
+
+.rotate-left-icon {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    bottom: -9px;
+    left: -30px;
 }
 
 @media (max-width: 600px) {

@@ -14,11 +14,13 @@ import Slider from './Slider';
 
 import './styles.css';
 
+import plus from '../../assets/icons/plus.png';
+import minus from '../../assets/icons/minus.png';
+import rotateIcon from '../../assets/icons/rotate.png';
+
 import Footer from '../../layout/Footer/Footer';
 
 import juntosplus from '../../assets/images/juntosplus.png';
-import front from '../../assets/images/front.png';
-import back from '../../assets/images/back.png';
 import arrow from '../../assets/icons/arrow-right.png';
 import loader from '../../assets/icons/loader.svg';
 
@@ -123,9 +125,9 @@ function Edit({
             fontSize: '5vw',
           }}
           >
-            Clique e segure na imagem para compartilhar ou baixar!
+            Haz clic y mantén presionado en la imagen para compartir o descargar!
           </p>
-          <button type="button" onClick={() => navigate('/')} className="edit-buttons-back">Tirar outra</button>
+          <button type="button" onClick={() => navigate('/')} className="edit-buttons-back">Tomar otra</button>
         </div>
       </div>
     );
@@ -227,7 +229,7 @@ function Edit({
                       step === 1
                         ? (
                           <div className="edit-position-container">
-                            <p className="edit-tool-title">Reposicione sua selfie</p>
+                            <p className="edit-tool-title">Posiciona tu selfie</p>
                             <div className="edit-position-buttons-container">
                               <div className="up-and-down">
                                 <img src={arrow} alt="arrow-up" className="arrow-up" onClick={() => setAddTop(addTop + 2)} />
@@ -238,6 +240,10 @@ function Edit({
                                 <img src={arrow} alt="arrow-right" className="arrow-right" onClick={() => setAddRight(addRight + 2)} />
                               </div>
                             </div>
+                            <img src={plus} className="plus-icon" alt="plus" />
+                            <img src={minus} className="minus-icon" alt="minus" />
+                            <img src={rotateIcon} className="rotate-left-icon" alt="rotate" />
+                            <img src={rotateIcon} className="rotate-right-icon" alt="rotate" />
                             <Slider values={zoom} setValues={setZoom} />
                             <div style={{ height: '32px' }} />
                             <Slider values={rotate} setValues={setRotate} />
@@ -245,7 +251,7 @@ function Edit({
                         )
                         : (
                           <div className="edit-position-container">
-                            <p className="edit-tool-title">Escolha o fundo</p>
+                            <p className="edit-tool-title">Elige el fondo</p>
                             <div className="edit-background-container">
                               {
                                 backgroundOptions.map((option) => (
@@ -275,7 +281,7 @@ function Edit({
                       <button type="button" onClick={() => navigate('/upload')} className="edit-buttons-back">Voltar</button>
                       <button type="button" onClick={handleContinue} className="edit-buttons-continue">
                         {
-                          isMobile ? 'Próximo' : 'Baixar'
+                          isMobile ? 'Siguiente' : 'Descargar'
                         }
                       </button>
                     </div>

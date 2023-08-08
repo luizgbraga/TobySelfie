@@ -86,7 +86,7 @@ function Upload({
                   }}
                 />
                 <div className="uploaded-buttons">
-                  <button type="button" onClick={() => setNext(false)} className="uploaded-buttons-back">Voltar</button>
+                  <button type="button" onClick={() => setNext(false)} className="uploaded-buttons-back">Regresar</button>
                   <button type="button" onClick={() => navigate('/edit')} className="uploaded-buttons-continue">Continuar</button>
                 </div>
               </div>
@@ -103,7 +103,7 @@ function Upload({
                       </div>
                     )
                     // not waiting to capture
-                    : <p className="upload-title">Tire uma foto ou faça o upload</p>
+                    : <p className="upload-title">Toma una foto o sube un archivo</p>
                 }
                 {
                   // waiting to capture
