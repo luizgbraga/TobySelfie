@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable no-unused-vars */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
@@ -20,12 +22,33 @@ import back from '../../assets/images/back.png';
 import arrow from '../../assets/icons/arrow-right.png';
 import loader from '../../assets/icons/loader.svg';
 
+import moveRed from '../../assets/icons/move-red.png';
+import moveWhite from '../../assets/icons/move-white.png';
+import brushRed from '../../assets/icons/brush-red.png';
+import brushWhite from '../../assets/icons/brush-white.png';
+
+import front1 from '../../assets/images/mockups/front1.png';
+import front2 from '../../assets/images/mockups/front2.png';
+import front3 from '../../assets/images/mockups/front3.png';
+import back1 from '../../assets/images/mockups/back1.png';
+import back2 from '../../assets/images/mockups/back2.png';
+import back3 from '../../assets/images/mockups/back3.png';
+
 function Edit({
   imageFile, croppedImageURL, setCroppedImageURL, loading, setLoading,
 }) {
   const navigate = useNavigate();
   const [download, setDownload] = useState(false);
   const [resultUrl, setResultUrl] = useState('');
+  const [step, setStep] = useState(1);
+
+  const [selectedBack, setSelectedBack] = useState({ id: 1, front: front1, back: back1 });
+
+  const backgroundOptions = [
+    { id: 1, front: front1, back: back1 },
+    { id: 2, front: front2, back: back2 },
+    { id: 3, front: front3, back: back3 },
+  ];
 
   const exportRef = useRef();
   const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -121,7 +144,7 @@ function Edit({
                   <div
                     className="your-image-container"
                     style={{
-                      backgroundImage: `url(${back})`,
+                      backgroundImage: `url(${selectedBack.back})`,
                       backgroundSize: 'contain',
                       backgroundPosition: 'center',
                       position: 'relative',
@@ -143,13 +166,13 @@ function Edit({
                         height: '70%',
                       }}
                     />
-                    <img src={front} alt="front" className="front-part" />
+                    <img src={selectedBack.front} alt="front" className="front-part" />
                   </div>
                   <div
                     className="your-image-container-download"
                     ref={exportRef}
                     style={{
-                      backgroundImage: `url(${back})`,
+                      backgroundImage: `url(${selectedBack.back})`,
                       backgroundSize: 'contain',
                       backgroundPosition: 'center',
                       position: 'absolute',
@@ -174,25 +197,80 @@ function Edit({
                         height: '70%',
                       }}
                     />
-                    <img src={front} alt="front" className="front-part-download" />
+                    <img src={selectedBack.front} alt="front" className="front-part-download" />
                   </div>
                   <div className="edit-tools-container">
-                    <div className="edit-position-container">
-                      <p className="edit-tool-title">Reposicione sua selfie</p>
-                      <div className="edit-position-buttons-container">
-                        <div className="up-and-down">
-                          <img src={arrow} alt="arrow-up" className="arrow-up" onClick={() => setAddTop(addTop + 2)} />
-                          <img src={arrow} alt="arrow-down" className="arrow-down" onClick={() => setAddTop(addTop - 2)} />
-                        </div>
-                        <div className="left-and-right">
-                          <img src={arrow} alt="arrow-left" className="arrow-left" onClick={() => setAddRight(addRight - 2)} />
-                          <img src={arrow} alt="arrow-right" className="arrow-right" onClick={() => setAddRight(addRight + 2)} />
-                        </div>
-                      </div>
-                      <Slider values={zoom} setValues={setZoom} />
-                      <div style={{ height: '32px' }} />
-                      <Slider values={rotate} setValues={setRotate} />
-                    </div>
+                    {
+                      step === 1
+                        ? (
+                          <div className="edit-tools-steps-container">
+                            <div className="edit-tool-step-container-selected">
+                              <img src={moveWhite} alt="selected-move-icon" className="step-icon" />
+                            </div>
+                            <div className="edit-tool-step-container" onClick={() => setStep(2)}>
+                              <img src={brushRed} alt="selected-move-icon" className="step-icon" />
+                            </div>
+                          </div>
+                        )
+                        : (
+                          <div className="edit-tools-steps-container">
+                            <div className="edit-tool-step-container" onClick={() => setStep(1)}>
+                              <img src={moveRed} alt="selected-move-icon" className="step-icon" />
+                            </div>
+                            <div className="edit-tool-step-container-selected">
+                              <img src={brushWhite} alt="selected-move-icon" className="step-icon" />
+                            </div>
+                          </div>
+                        )
+                    }
+                    {
+                      step === 1
+                        ? (
+                          <div className="edit-position-container">
+                            <p className="edit-tool-title">Reposicione sua selfie</p>
+                            <div className="edit-position-buttons-container">
+                              <div className="up-and-down">
+                                <img src={arrow} alt="arrow-up" className="arrow-up" onClick={() => setAddTop(addTop + 2)} />
+                                <img src={arrow} alt="arrow-down" className="arrow-down" onClick={() => setAddTop(addTop - 2)} />
+                              </div>
+                              <div className="left-and-right">
+                                <img src={arrow} alt="arrow-left" className="arrow-left" onClick={() => setAddRight(addRight - 2)} />
+                                <img src={arrow} alt="arrow-right" className="arrow-right" onClick={() => setAddRight(addRight + 2)} />
+                              </div>
+                            </div>
+                            <Slider values={zoom} setValues={setZoom} />
+                            <div style={{ height: '32px' }} />
+                            <Slider values={rotate} setValues={setRotate} />
+                          </div>
+                        )
+                        : (
+                          <div className="edit-position-container">
+                            <p className="edit-tool-title">Escolha o fundo</p>
+                            <div className="edit-background-container">
+                              {
+                                backgroundOptions.map((option) => (
+                                  <div
+                                    className="your-image-container-option"
+                                    style={{
+                                      backgroundImage: `url(${option.back})`,
+                                      backgroundSize: 'contain',
+                                      backgroundPosition: 'center',
+                                      position: 'relative',
+                                    }}
+                                    onClick={() => {
+                                      if (option.id !== selectedBack.id) {
+                                        setSelectedBack(option);
+                                      }
+                                    }}
+                                  >
+                                    <img src={option.front} alt="front" className="front-part-option" />
+                                  </div>
+                                ))
+                              }
+                            </div>
+                          </div>
+                        )
+                    }
                     <div className="edit-buttons-container">
                       <button type="button" onClick={() => navigate('/upload')} className="edit-buttons-back">Voltar</button>
                       <button type="button" onClick={handleContinue} className="edit-buttons-continue">

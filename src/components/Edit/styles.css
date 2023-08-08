@@ -53,6 +53,41 @@
     z-index: 5;
 }
 
+.your-image-container-option {
+    height: 25vh;
+    width: calc(25vh * 1080/1920);
+    position: relative;
+    border-radius: 8px;
+    transition: .25s;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.your-image-container-option-selected {
+    height: 25vh;
+    width: calc(25vh * 1080/1920);
+    position: relative;
+    border-radius: 8px;
+    transition: .25s;
+    cursor: pointer;
+    border-radius: 8px;
+    border: 2px solid #651C32;
+}
+
+
+.your-image-container-option:hover {
+    transform: scale(1.05);
+    filter: brightness(1.08);
+}
+
+.your-image-container-option .front-part-option {
+    position: absolute;
+    height: 25vh;
+    width: calc(25vh * 1080/1920);
+    left: 0;
+    z-index: 5;
+}
+
 .your-image-container-download {
     height: 60vh;
     width: calc(60vh * 1080/1920);
@@ -75,9 +110,9 @@
 }
 
 .edit-tool-title {
-    font-size: 2vw;
+    font-size: 1.6vw;
     font-weight: 600;
-    margin-bottom: 2vw;
+    margin-bottom: 1vw;
 }
 
 .edit-position-container {
@@ -177,6 +212,48 @@
     filter: brightness(1.5)
 }
 
+.edit-tools-steps-container {
+    display: flex;
+    gap: 2vw;
+    margin-bottom: 1vw;
+}
+
+.edit-tool-step-container-selected {
+    background-color: #651C32;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 3vw;
+    height: 3vw;
+}
+
+.edit-tool-step-container {
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 3vw;
+    height: 3vw;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.edit-tool-step-container:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+}
+
+.step-icon {
+    width: 60%;
+    height: 60%;
+}
+
+.edit-background-container {
+    display: flex;
+    gap: 2vw;
+}
+
 @media (max-width: 600px) {
     .edit-body {
         height: 140vh;
@@ -246,4 +323,24 @@
         margin-top: 6vw;
         z-index: 100;
     }
+
+    .edit-tool-step-container-selected {
+        width: 14vw;
+        height: 14vw;
+    }
+    
+    .edit-tool-step-container {
+        width: 14vw;
+        height: 14vw;
+    }
+
+    .edit-tools-steps-container {
+        gap: 10vw;
+    }
+
+    .your-image-container-option:hover {
+        transform: scale(1);
+        filter: brightness(1.08);
+    }
+
 }
