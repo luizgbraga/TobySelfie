@@ -54,16 +54,16 @@
 }
 
 .your-image-container-download {
-    height: 90vh;
-    width: calc(90vh * 1080/1920);
+    height: 1vh;
+    width: calc(1vh * 1080/1920);
     position: relative;
     border-radius: 8px;
 }
 
 .your-image-container-download .front-part-download {
     position: absolute;
-    height: 90vh;
-    width: calc(90vh * 1080/1920);
+    height: 1vh;
+    width: calc(1vh * 1080/1920);
     z-index: -1;
 }
 
