@@ -71,7 +71,6 @@ function Edit({
           setDownload(true);
           // const file = base64ToFile(dataBase64, 'you-and-toby.jpg', 'image/jpeg');
           // const url = URL.createObjectURL(file);
-          console.log(dataBase64);
           setResultUrl(dataBase64);
         } else {
           const link = document.createElement('a');
