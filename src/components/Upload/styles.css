@@ -11,7 +11,7 @@
 }
 
 .upload-body {
-    min-height: calc(100vh - 64px);
+    min-height: calc(100vh - 16px - 1.2vw - 1.42vw);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -33,7 +33,7 @@
     box-shadow:30px 30px 0px 0px rgba(101,28,50,1);
     border: 5px solid rgba(101,28,50,1);
     background-color: #F8E2DE;
-    padding: 60px 100px;
+    padding: 3vw 6vw;
     border-radius: 20px;
 }
 
@@ -77,11 +77,14 @@
 
 .back-container {
     background-color: #651C32;
-    padding: 10px 14px;
     border-radius: 10px;
+    padding: 8px;
     cursor: pointer;
     transition: .2s;
     margin-bottom: 1vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .back-container:hover {
@@ -109,7 +112,7 @@
     border: 0;
     padding: 8px 24px;
     border-radius: 12px;
-    font-size: 1vw;
+    font-size: 1.2vw;
     text-transform: uppercase;
     letter-spacing: 1px;
     font-weight: 700;
@@ -124,7 +127,7 @@
     border: 1px solid #651C32;
     padding: 8px 24px;
     border-radius: 12px;
-    font-size: 1vw;
+    font-size: 1.2vw;
     text-transform: uppercase;
     letter-spacing: 1px;
     font-weight: 700;
@@ -138,6 +141,7 @@
     height: 40vh;
     width: calc(40vh * 1080/1920);
     margin-bottom: 40px;
+    border-radius: 6px;
 }
 
 .uploaded-buttons-continue:hover {
@@ -158,12 +162,11 @@
     align-self: end;
     display: flex;
     flex-direction: column;
-    gap: 12px;
     position: absolute;
     bottom: 16px;
     z-index: 10;
     background-color: #651C32;
-    padding: 12px;
+    padding: 10px;
     border-radius: 50%;
     cursor: pointer;
     transition: .1s;
@@ -175,10 +178,13 @@
 }
 
 .webcam-capture-container img {
-    width: 36px;
+    width: 32px;
 }
 
 @media (max-width: 600px) {
+    .upload-body {
+        min-height: calc(88vh);
+    }
     .upload-title {
         font-size: 5vw;
     }
@@ -205,9 +211,13 @@
 
     .upload-content {
         box-shadow: 8px 8px 0px 0px rgba(101,28,50,1);
-        padding: 32px 18px;
+        padding: 32px 28px;
         border-radius: 16px;
         position: relative;
+    }
+    
+    .uploaded-buttons {
+        gap: 18px;
     }
     
 }

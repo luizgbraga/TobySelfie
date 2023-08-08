@@ -1,6 +1,8 @@
-import React from "react";
-import Webcam from "react-webcam";
+import React from 'react';
+import Webcam from 'react-webcam';
 
-const WebcamComponent = () => <Webcam />;
+function WebcamComponent() {
+  return <Webcam />;
+}
 
 export default WebcamComponent;
