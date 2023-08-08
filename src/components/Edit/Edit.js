@@ -45,10 +45,6 @@ function Edit({
       .then((response) => {
         setCroppedImageURL(response.data.data.image); // URL
         setLoading(false);
-      })
-      .catch((error) => {
-        console.error(error);
-        setLoading(false);
       });
   }, [imageFile, setCroppedImageURL, setLoading]);
 
@@ -76,7 +72,6 @@ function Edit({
           const file = base64ToFile(dataBase64, 'you-and-toby.jpg', 'image/jpeg');
           const url = URL.createObjectURL(file);
           setResultUrl(url);
-          console.log(url);
         } else {
           const link = document.createElement('a');
           link.href = dataBase64;
@@ -85,9 +80,6 @@ function Edit({
           link.click();
           document.body.removeChild(link);
         }
-      })
-      .catch((err) => {
-        console.log(err);
       });
   }, [exportRef]);
 
