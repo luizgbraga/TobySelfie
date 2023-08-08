@@ -4,7 +4,7 @@
 import React, {
   useEffect, useState, useRef, useCallback,
 } from 'react';
-import { toPng } from 'html-to-image';
+import { toJpeg } from 'html-to-image';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -66,7 +66,7 @@ function Edit({
   };
 
   const handleContinue = useCallback(() => {
-    toPng(exportRef.current, { cacheBust: true })
+    toJpeg(exportRef.current, { cacheBust: true })
       .then((dataBase64) => {
         if (isMobile) {
           setDownload(true);
