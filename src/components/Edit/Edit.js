@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
@@ -8,7 +7,6 @@ import React, {
 import { toPng } from 'html-to-image';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import * as htmlToImage from 'html-to-image';
 
 import Slider from './Slider';
 
@@ -56,13 +54,35 @@ function Edit({
   const [addRight, setAddRight] = useState(0);
   const [addTop, setAddTop] = useState(0);
 
-  const handleContinue = () => {
-    htmlToImage.toCanvas(document.getElementById('your-image-download'))
-      .then((canvas) => {
-        setDownload(true);
-        document.body.appendChild(canvas);
-      });
+  const base64ToFile = (base64String, fileName, mimeType) => {
+    const base64Data = base64String.replace(/^data:image\/(png|jpeg|jpg);base64,/, '');
+    const binaryData = atob(base64Data);
+    const byteArray = new Uint8Array(binaryData.length);
+    for (let i = 0; i < binaryData.length; i += 1) {
+      byteArray[i] = binaryData.charCodeAt(i);
+    }
+    const blob = new Blob([byteArray], { type: mimeType || 'image/jpeg' });
+    return new File([blob], fileName, { type: mimeType || 'image/jpeg' });
   };
+
+  const handleContinue = useCallback(() => {
+    toPng(exportRef.current, { cacheBust: true })
+      .then((dataBase64) => {
+        if (isMobile) {
+          setDownload(true);
+          const file = base64ToFile(dataBase64, 'you-and-toby.jpg', 'image/jpeg');
+          const url = URL.createObjectURL(file);
+          setResultUrl(url);
+        } else {
+          const link = document.createElement('a');
+          link.href = dataBase64;
+          link.download = 'you-and-toby.png';
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        }
+      });
+  }, [exportRef]);
 
   if (download) {
     return (
@@ -126,7 +146,6 @@ function Edit({
                     <img src={front} alt="front" className="front-part" />
                   </div>
                   <div
-                    id="your-image-download"
                     className="your-image-container-download"
                     ref={exportRef}
                     style={{
