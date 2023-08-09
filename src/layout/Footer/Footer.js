@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 
 import './styles.css';
@@ -15,8 +17,8 @@ function Footer() {
           <p>Gestionar Preferencias</p>
         </div>
         <div className="footer-social-container">
-          <img src={facebook} alt="fb-icon" />
-          <img src={instagram} alt="ig-icon" />
+          <img src={facebook} alt="fb-icon" onClick={() => window.open('https://www.facebook.com/cocacolafemsamexico/', '_blank').focus()} />
+          <img src={instagram} alt="ig-icon" onClick={() => window.open('https://www.instagram.com/cocacolafemsa_mx/', '_blank').focus()} />
         </div>
       </div>
       <div className="footer-bottom">

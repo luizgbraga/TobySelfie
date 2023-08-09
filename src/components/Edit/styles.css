@@ -114,6 +114,20 @@
     font-size: 1.6vw;
     font-weight: 600;
     margin-bottom: 1vw;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.reset-button {
+    width: 1.7vw;
+    height: 1.7vw;
+    cursor: pointer;
+    transition: .25s;
+}
+
+.reset-button:hover {
+    transform: scale(1.05);
 }
 
 .edit-position-container {
@@ -262,6 +276,7 @@
     position: absolute;
     bottom: 29px;
     right: -30px;
+    cursor: pointer;
 }
 
 .minus-icon {
@@ -270,6 +285,7 @@
     position: absolute;
     bottom: 29px;
     left: -30px;
+    cursor: pointer;
 }
 
 .rotate-right-icon {
@@ -279,6 +295,7 @@
     bottom: -9px;
     right: -30px;
     transform: scaleX(-1);
+    cursor: pointer;
 }
 
 .rotate-left-icon {
@@ -287,6 +304,7 @@
     position: absolute;
     bottom: -9px;
     left: -30px;
+    cursor: pointer;
 }
 
 @media (max-width: 600px) {

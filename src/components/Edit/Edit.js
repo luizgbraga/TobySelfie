@@ -24,6 +24,8 @@ import juntosplus from '../../assets/images/juntosplus.png';
 import arrow from '../../assets/icons/arrow-right.png';
 import loader from '../../assets/icons/loader.svg';
 
+import reset from '../../assets/icons/reset.png';
+
 import moveRed from '../../assets/icons/move-red.png';
 import moveWhite from '../../assets/icons/move-white.png';
 import brushRed from '../../assets/icons/brush-red.png';
@@ -158,14 +160,14 @@ function Edit({
                         backgroundImage: `url(${croppedImageURL})`,
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',
-                        transform: `scale(${zoom[0] / 50}) rotate(${(rotate[0] - 50) * 3.6}deg)`,
+                        transform: `scale(${zoom[0] / 50}) rotate(${(rotate[0] - 50) * 3.6}deg) scaleX(-1)`,
                         left: '50%',
                         bottom: `calc(20% + ${addTop}px)`,
                         marginLeft: `calc(-35% + ${addRight}px)`,
                         position: 'absolute',
                         zIndex: '2',
                         width: '70%',
-                        height: '70%',
+                        height: '60%',
                       }}
                     />
                     <img src={selectedBack.front} alt="front" className="front-part" />
@@ -189,14 +191,14 @@ function Edit({
                         backgroundImage: `url(${croppedImageURL})`,
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',
-                        transform: `scale(${zoom[0] / 50}) rotate(${(rotate[0] - 50) * 3.6}deg)`,
+                        transform: `scale(${zoom[0] / 50}) rotate(${(rotate[0] - 50) * 3.6}deg) scaleX(-1)`,
                         left: '50%',
                         bottom: `calc(15% + ${addTop}px)`,
                         marginLeft: `calc(-35% + ${addRight}px)`,
                         position: 'absolute',
                         zIndex: '-3',
                         width: '70%',
-                        height: '70%',
+                        height: '60%',
                       }}
                     />
                     <img src={selectedBack.front} alt="front" className="front-part-download" />
@@ -229,7 +231,21 @@ function Edit({
                       step === 1
                         ? (
                           <div className="edit-position-container">
-                            <p className="edit-tool-title">Posiciona tu selfie</p>
+                            <p className="edit-tool-title">
+                              Posiciona tu selfie
+                              {' '}
+                              <img
+                                src={reset}
+                                alt="undo"
+                                className="reset-button"
+                                onClick={() => {
+                                  setZoom([50]);
+                                  setRotate([50]);
+                                  setAddRight(0);
+                                  setAddTop(0);
+                                }}
+                              />
+                            </p>
                             <div className="edit-position-buttons-container">
                               <div className="up-and-down">
                                 <img src={arrow} alt="arrow-up" className="arrow-up" onClick={() => setAddTop(addTop + 2)} />
@@ -240,10 +256,10 @@ function Edit({
                                 <img src={arrow} alt="arrow-right" className="arrow-right" onClick={() => setAddRight(addRight + 2)} />
                               </div>
                             </div>
-                            <img src={plus} className="plus-icon" alt="plus" />
-                            <img src={minus} className="minus-icon" alt="minus" />
-                            <img src={rotateIcon} className="rotate-left-icon" alt="rotate" />
-                            <img src={rotateIcon} className="rotate-right-icon" alt="rotate" />
+                            <img src={plus} className="plus-icon" alt="plus" onClick={() => setZoom([zoom[0] + 1])} />
+                            <img src={minus} className="minus-icon" alt="minus" onClick={() => setZoom([zoom[0] - 1])} />
+                            <img src={rotateIcon} className="rotate-left-icon" alt="rotate" onClick={() => setRotate([rotate[0] - 1])} />
+                            <img src={rotateIcon} className="rotate-right-icon" alt="rotate" onClick={() => setRotate([rotate[0] + 1])} />
                             <Slider values={zoom} setValues={setZoom} />
                             <div style={{ height: '32px' }} />
                             <Slider values={rotate} setValues={setRotate} />
