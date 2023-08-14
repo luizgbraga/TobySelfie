@@ -142,6 +142,7 @@
     width: calc(40vh * 1080/1920);
     margin-bottom: 40px;
     border-radius: 6px;
+    transform: scaleX(-1);
 }
 
 .uploaded-buttons-continue:hover {
@@ -156,6 +157,7 @@
     justify-content: center;
     overflow: hidden;
     position: relative;
+    transform: scaleX(-1);
 }
 
 .webcam-capture-container {
