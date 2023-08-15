@@ -64,9 +64,26 @@
     filter: brightness(1.5)
 }
 
+.language-container {
+    position: absolute;
+    right: 50px;
+    top: 24px;
+    border: 3px solid #651C32;
+    border-radius: 10px;
+    padding: 6px 20px;
+    cursor: pointer;
+    transition: .25s;
+}
+
+.language-container:hover {
+    transform: scale(1.02);
+    filter: brightness(1.6);
+}
+
 @media (max-width: 600px) {
     .welcome-page-body {
         min-height: calc(88vh);
+        padding-top: 50px
     }
 
     .welcome-page-title {
@@ -97,5 +114,15 @@
         width: 40px;
         bottom: 36%;
     }
-    
+
+    .language-container {
+        right: 20px;
+        top: 12px;
+        border-radius: 10px;
+        padding: 5px 15px;
+    }
+
+    .language-container p {
+        font-size: 14px;
+    }
 }

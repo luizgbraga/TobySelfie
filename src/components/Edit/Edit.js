@@ -31,28 +31,48 @@ import moveWhite from '../../assets/icons/move-white.png';
 import brushRed from '../../assets/icons/brush-red.png';
 import brushWhite from '../../assets/icons/brush-white.png';
 
-import front1 from '../../assets/images/mockups/front1.png';
-import front2 from '../../assets/images/mockups/front2.png';
-import front3 from '../../assets/images/mockups/front3.png';
-import back1 from '../../assets/images/mockups/back1.png';
-import back2 from '../../assets/images/mockups/back2.png';
-import back3 from '../../assets/images/mockups/back3.png';
+import front1Es from '../../assets/images/mockups/spanish/front1.png';
+import front2Es from '../../assets/images/mockups/spanish/front2.png';
+import front3Es from '../../assets/images/mockups/spanish/front3.png';
+import back1Es from '../../assets/images/mockups/spanish/back1.png';
+import back2Es from '../../assets/images/mockups/spanish/back2.png';
+import back3Es from '../../assets/images/mockups/spanish/back3.png';
+
+import front1Pt from '../../assets/images/mockups/portuguese/front1.png';
+import front2Pt from '../../assets/images/mockups/portuguese/front2.png';
+import front3Pt from '../../assets/images/mockups/portuguese/front3.png';
+import back1Pt from '../../assets/images/mockups/portuguese/back1.png';
+import back2Pt from '../../assets/images/mockups/portuguese/back2.png';
+import back3Pt from '../../assets/images/mockups/portuguese/back3.png';
 
 function Edit({
-  imageFile, croppedImageURL, setCroppedImageURL, loading, setLoading,
+  imageFile, croppedImageURL, setCroppedImageURL, loading, setLoading, language,
 }) {
   const navigate = useNavigate();
   const [download, setDownload] = useState(false);
   const [resultUrl, setResultUrl] = useState('');
   const [step, setStep] = useState(1);
+  const [err, setErr] = useState('');
 
-  const [selectedBack, setSelectedBack] = useState({ id: 1, front: front1, back: back1 });
+  const [selectedBack, setSelectedBack] = useState({
+    id: 1,
+    front: language === 'pt' ? front1Pt : front1Es,
+    back: language === 'pt' ? back1Pt : back1Es,
+  });
 
-  const backgroundOptions = [
-    { id: 1, front: front1, back: back1 },
-    { id: 2, front: front2, back: back2 },
-    { id: 3, front: front3, back: back3 },
+  const backgroundOptionsSpanish = [
+    { id: 1, front: front1Es, back: back1Es },
+    { id: 2, front: front2Es, back: back2Es },
+    { id: 3, front: front3Es, back: back3Es },
   ];
+
+  const backgroundOptionsPortuguese = [
+    { id: 1, front: front1Pt, back: back1Pt },
+    { id: 2, front: front2Pt, back: back2Pt },
+    { id: 3, front: front3Pt, back: back3Pt },
+  ];
+
+  const backgroundOptions = language === 'pt' ? backgroundOptionsPortuguese : backgroundOptionsSpanish;
 
   const exportRef = useRef();
   const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -73,6 +93,14 @@ function Edit({
       .then((response) => {
         setCroppedImageURL(response.data.data.image); // URL
         setLoading(false);
+        setErr('');
+        if (response.status !== 200) {
+          setErr(language === 'pt' ? 'Desculpe, ocorreu um erro' : 'Lo siento, ocurrió un error');
+        }
+      })
+      .catch((error) => {
+        setLoading(false);
+        setErr(error.message);
       });
   }, [imageFile, setCroppedImageURL, setLoading]);
 
@@ -111,6 +139,27 @@ function Edit({
       });
   }, [exportRef]);
 
+  if (err) {
+    return (
+      <div className="edit-page">
+        <div className="edit-body">
+          <img className="edit-logo-little" alt="logo" src={juntosplus} />
+          <p style={{
+            padding: '40px 12vw',
+            textAlign: 'center',
+            fontSize: '5vw',
+          }}
+          >
+            {err}
+          </p>
+          <button type="button" onClick={() => navigate('/')} className="edit-buttons-back">
+            { language === 'pt' ? 'Tirar outra' : 'Tomar otra' }
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   if (download) {
     return (
       <div className="edit-page">
@@ -127,9 +176,15 @@ function Edit({
             fontSize: '5vw',
           }}
           >
-            Haz clic y mantén presionado en la imagen para compartir o descargar!
+            {
+              language === 'pt'
+                ? 'Clique e segure na imagem para baixar e compartilhar!'
+                : 'Haz clic y mantén presionado en la imagen para compartir o descargar!'
+            }
           </p>
-          <button type="button" onClick={() => navigate('/')} className="edit-buttons-back">Tomar otra</button>
+          <button type="button" onClick={() => navigate('/')} className="edit-buttons-back">
+            { language === 'pt' ? 'Tirar outra' : 'Tomar otra' }
+          </button>
         </div>
       </div>
     );
@@ -193,8 +248,8 @@ function Edit({
                         backgroundPosition: 'center',
                         transform: `scale(${zoom[0] / 50}) rotate(${(rotate[0] - 50) * 3.6}deg) scaleX(-1)`,
                         left: '50%',
-                        bottom: `calc(15% + ${addTop}px)`,
-                        marginLeft: `calc(-35% + ${addRight}px)`,
+                        bottom: `calc(15% + ${addTop * 1.8}px)`,
+                        marginLeft: `calc(-35% + ${addRight * 1.5}px)`,
                         position: 'absolute',
                         zIndex: '-3',
                         width: '70%',
@@ -232,7 +287,9 @@ function Edit({
                         ? (
                           <div className="edit-position-container">
                             <p className="edit-tool-title">
-                              Posiciona tu selfie
+                              {
+                                language === 'pt' ? 'Posicione sua selfie' : 'Posiciona tu selfie'
+                              }
                               {' '}
                               <img
                                 src={reset}
@@ -267,11 +324,12 @@ function Edit({
                         )
                         : (
                           <div className="edit-position-container">
-                            <p className="edit-tool-title">Elige el fondo</p>
+                            <p className="edit-tool-title">{language === 'pt' ? 'Escolha o fundo' : 'Elige el fondo'}</p>
                             <div className="edit-background-container">
                               {
                                 backgroundOptions.map((option) => (
                                   <div
+                                    key={option.id}
                                     className="your-image-container-option"
                                     style={{
                                       backgroundImage: `url(${option.back})`,
@@ -294,7 +352,7 @@ function Edit({
                         )
                     }
                     <div className="edit-buttons-container">
-                      <button type="button" onClick={() => navigate('/upload')} className="edit-buttons-back">Voltar</button>
+                      <button type="button" onClick={() => navigate(`/${language}/upload`)} className="edit-buttons-back">{language === 'pt' ? 'Voltar' : 'Regresar'}</button>
                       <button type="button" onClick={handleContinue} className="edit-buttons-continue">
                         {
                           isMobile ? 'Siguiente' : 'Descargar'

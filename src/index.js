@@ -15,7 +15,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/:step?" element={<Main />} />
+        <Route path="/:language?/:step?" element={<Main />} />
       </Routes>
     </BrowserRouter>
   );

@@ -7,14 +7,12 @@ import './styles.css';
 import facebook from '../../assets/icons/facebook.png';
 import instagram from '../../assets/icons/instagram.png';
 
-function Footer() {
+function Footer({ language }) {
   return (
     <div className="footer-container">
       <div className="footer-up">
         <div className="footer-links-container">
-          <p>Política de Privacidad</p>
-          <p>Términos de Uso</p>
-          <p>Gestionar Preferencias</p>
+          <p>Coca-Cola FEMSA</p>
         </div>
         <div className="footer-social-container">
           <img src={facebook} alt="fb-icon" onClick={() => window.open('https://www.facebook.com/cocacolafemsamexico/', '_blank').focus()} />
@@ -22,7 +20,11 @@ function Footer() {
         </div>
       </div>
       <div className="footer-bottom">
-        <p>Coca-Cola FEMSA. Todos los derechos reservados.</p>
+        {
+          language === 'pt'
+            ? <p>Coca-Cola FEMSA. Todos os direitos reservados.</p>
+            : <p>Coca-Cola FEMSA. Todos los derechos reservados.</p>
+        }
       </div>
     </div>
   );

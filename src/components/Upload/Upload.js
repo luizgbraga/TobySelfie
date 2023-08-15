@@ -17,7 +17,7 @@ import back from '../../assets/icons/back.png';
 import juntosplus from '../../assets/images/juntosplus.png';
 
 function Upload({
-  setImageFile, imageBase64, setImageBase64,
+  setImageFile, imageBase64, setImageBase64, language,
 }) {
   const [width, setWidth] = useState(window.innerWidth);
   const [next, setNext] = useState(false);
@@ -86,8 +86,8 @@ function Upload({
                   }}
                 />
                 <div className="uploaded-buttons">
-                  <button type="button" onClick={() => setNext(false)} className="uploaded-buttons-back">Regresar</button>
-                  <button type="button" onClick={() => navigate('/edit')} className="uploaded-buttons-continue">Continuar</button>
+                  <button type="button" onClick={() => setNext(false)} className="uploaded-buttons-back">{language === 'pt' ? 'Voltar' : 'Regresar'}</button>
+                  <button type="button" onClick={() => navigate(`/${language}/edit`)} className="uploaded-buttons-continue">Continuar</button>
                 </div>
               </div>
             )
@@ -103,7 +103,7 @@ function Upload({
                       </div>
                     )
                     // not waiting to capture
-                    : <p className="upload-title">Toma una foto o sube un archivo</p>
+                    : <p className="upload-title">{language === 'pt' ? 'Tire uma foto ou selecione um arquivo' : 'Toma una foto o sube un archivo'}</p>
                 }
                 {
                   // waiting to capture
@@ -153,7 +153,7 @@ function Upload({
             )
           }
       </div>
-      <Footer />
+      <Footer language={language} />
     </div>
   );
 }

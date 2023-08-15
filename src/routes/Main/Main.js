@@ -4,10 +4,9 @@ import { useParams } from 'react-router-dom';
 import Welcome from '../../components/Welcome/Welcome';
 import Upload from '../../components/Upload/Upload';
 import Edit from '../../components/Edit/Edit';
-import Share from '../../components/Share/Share';
 
 function Main() {
-  const { step } = useParams();
+  const { step, language } = useParams();
 
   const [imageFile, setImageFile] = useState(null);
   const [imageBase64, setImageBase64] = useState(null);
@@ -15,7 +14,7 @@ function Main() {
   const [loading, setLoading] = useState(false);
 
   if (!step) {
-    return <Welcome />;
+    return <Welcome language={language} />;
   }
 
   if (step === 'upload') {
@@ -24,6 +23,7 @@ function Main() {
         setImageFile={setImageFile}
         imageBase64={imageBase64}
         setImageBase64={setImageBase64}
+        language={language}
       />
     );
   }
@@ -35,11 +35,9 @@ function Main() {
         setCroppedImageURL={setCroppedImageURL}
         loading={loading}
         setLoading={setLoading}
+        language={language}
       />
     );
-  }
-  if (step === 'share') {
-    return <Share imageFile={imageFile} />;
   }
   return (
     <div />

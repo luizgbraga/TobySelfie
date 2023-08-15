@@ -33,13 +33,14 @@
     box-shadow:30px 30px 0px 0px rgba(101,28,50,1);
     border: 5px solid rgba(101,28,50,1);
     background-color: #F8E2DE;
-    padding: 3vw 6vw;
+    padding: 3vw 5vw;
     border-radius: 20px;
 }
 
 .upload-title {
     font-size: 2vw;
     margin-bottom: 40px;
+    text-align: center;
 }
 
 .upload-back {
@@ -189,6 +190,7 @@
     }
     .upload-title {
         font-size: 5vw;
+        width: 75%;
     }
 
     .upload-icon {
@@ -213,7 +215,7 @@
 
     .upload-content {
         box-shadow: 8px 8px 0px 0px rgba(101,28,50,1);
-        padding: 32px 28px;
+        padding: 32px 16px;
         border-radius: 16px;
         position: relative;
     }
