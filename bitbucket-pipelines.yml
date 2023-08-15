@@ -1,0 +1,27 @@
+pipelines:
+  tags:
+    'v-*.*.*':
+      - step:
+          name: "Build Code Commit PROD AWS"
+          script:
+            - echo $CodeCommitConfig > ~/.ssh/config.tmp
+            - base64 -d  ~/.ssh/config.tmp > ~/.ssh/config
+            - cat ~/.ssh/config
+            - set +e
+            - ssh -o StrictHostKeyChecking=no $CodeCommitHost
+            - set -e
+            - git remote add codecommit ssh://$CodeCommitRepo
+            - git push --follow-tags --force codecommit $BITBUCKET_TAG:main
+  branches:
+    dev:
+      - step:
+          name: "Build Code Commit DEV AWS"
+          script:
+            - echo $CodeCommitConfig > ~/.ssh/config.tmp
+            - base64 -d  ~/.ssh/config.tmp > ~/.ssh/config
+            - cat ~/.ssh/config
+            - set +e
+            - ssh -o StrictHostKeyChecking=no $CodeCommitHost
+            - set -e
+            - git remote add codecommit ssh://$CodeCommitRepo
+            - git push codecommit dev:dev
