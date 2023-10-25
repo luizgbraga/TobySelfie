@@ -92,6 +92,7 @@ function Edit({
     const formData = new FormData();
     formData.append('sync', '1');
     formData.append('image_file', imageFile);
+    console.log(imageFile);
     axios.post('https://techhk.aoscdn.com/api/tasks/visual/segmentation', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',

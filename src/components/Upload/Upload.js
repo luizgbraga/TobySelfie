@@ -26,12 +26,37 @@ function Upload({
 
   const webcamRef = React.useRef(null);
 
-  const handleFile = (e) => {
+  const compressImage = async (file, { quality = 1, type = file.type }) => {
+    // Get as image data
+    const imageBitmap = await createImageBitmap(file);
+
+    // Draw to canvas
+    const canvas = document.createElement('canvas');
+    canvas.width = imageBitmap.width;
+    canvas.height = imageBitmap.height;
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(imageBitmap, 0, 0);
+
+    // Turn into Blob
+    // eslint-disable-next-line no-promise-executor-return
+    return new Promise((resolve) => canvas.toBlob(resolve, type, quality));
+  };
+
+  const handleFile = async (e) => {
     if (e.target.files && e.target.files[0]) {
-      setImageFile(e.target.files[0]); // an actual file object
+      const compressedFile = await compressImage(e.target.files[0], {
+        // 0: is maximum compression
+        // 1: is no compression
+        quality: 0.5,
+
+        // We want a JPEG file
+        type: 'image/jpeg',
+      });
+      const a = new File([compressedFile], 'fileName', { type: 'image/jpeg' });
+      setImageFile(a); // an actual file object
       const reader = new FileReader();
       reader.onload = (event) => setImageBase64(event.target.result); // base 64
-      reader.readAsDataURL(e.target.files[0]);
+      reader.readAsDataURL(a);
     }
     setNext(true);
   };
@@ -54,11 +79,20 @@ function Upload({
     return new File([blob], fileName, { type: mimeType || 'image/jpeg' });
   };
 
-  const captureImage = React.useCallback(() => {
+  const captureImage = React.useCallback(async () => {
     const screenshootBase64 = webcamRef.current.getScreenshot(); // screenshot image in base 64
     setImageBase64(screenshootBase64);
     const file = base64ToFile(screenshootBase64, 'webcam-capture.jpg', 'image/jpeg');
-    setImageFile(file);
+    const compressedFile = await compressImage(file, {
+      // 0: is maximum compression
+      // 1: is no compression
+      quality: 0.5,
+
+      // We want a JPEG file
+      type: 'image/jpeg',
+    });
+    const a = new File([compressedFile], 'fileName', { type: 'image/jpeg' });
+    setImageFile(a);
     setCapture(false);
     setNext(true);
   }, [webcamRef, setImageFile, setImageBase64]);
