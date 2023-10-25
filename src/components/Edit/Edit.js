@@ -53,12 +53,21 @@ function Edit({
   const [resultUrl, setResultUrl] = useState('');
   const [step, setStep] = useState(1);
   const [err, setErr] = useState('');
+  const [print, setPrint] = useState(false);
+  const [phrase, setPhrase] = useState('');
 
   const [selectedBack, setSelectedBack] = useState({
     id: 1,
     front: language === 'pt' ? front1Pt : front1Es,
     back: language === 'pt' ? back1Pt : back1Es,
   });
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
 
   const backgroundOptionsSpanish = [
     { id: 1, front: front1Es, back: back1Es },
@@ -83,7 +92,6 @@ function Edit({
     const formData = new FormData();
     formData.append('sync', '1');
     formData.append('image_file', imageFile);
-
     axios.post('https://techhk.aoscdn.com/api/tasks/visual/segmentation', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
@@ -120,28 +128,76 @@ function Edit({
     return new File([blob], fileName, { type: mimeType || 'image/jpeg' });
   };
 
-  const handleContinue = useCallback(() => {
+  const handleContinueDesktop = useCallback(() => {
     toJpeg(exportRef.current, { cacheBust: true })
       .then((dataBase64) => {
-        if (isMobile) {
-          setDownload(true);
-          const file = base64ToFile(dataBase64, 'you-and-toby.jpg', 'image/jpeg');
-          const url = URL.createObjectURL(file);
-          setResultUrl(url);
-        } else {
-          const link = document.createElement('a');
-          link.href = dataBase64;
-          link.download = 'you-and-toby.png';
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-        }
+        const link = document.createElement('a');
+        link.href = dataBase64;
+        link.download = 'you-and-toby.png';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
       });
   }, [exportRef]);
 
+  const handleContinueMobile = () => {
+    setPrint(true);
+    setPhrase(true);
+    scrollToTop();
+    const img = document.getElementById('test');
+    img.style.transition = 'all 0.5s ease-in-out';
+    img.style.transform = 'scale(1.6)';
+    img.style.zIndex = '501';
+    document.body.style.overflow = 'hidden';
+    const cont = document.getElementById('another');
+    cont.style.width = '100vw';
+    cont.style.height = '100vh';
+    cont.style.position = 'absolute';
+    cont.style.top = '0';
+    cont.style.left = '0';
+    cont.style.zIndex = '499';
+    cont.style.backgroundColor = 'hsla(9,49%,89%,0.98)';
+    cont.style.display = 'flex';
+    cont.style.justifyContent = 'center';
+    cont.style.alignItems = 'center';
+    setTimeout(() => {
+      setPhrase(false);
+    }, 2000);
+  };
+
+  const handleContinue = () => {
+    if (isMobile) {
+      handleContinueMobile();
+    } else {
+      handleContinueDesktop();
+    }
+  };
+
+  const close = () => {
+    if (print) {
+      setPrint(false);
+      const img = document.getElementById('test');
+      img.style.transition = 'all 0.5s ease-in-out';
+      img.style.transform = 'scale(1)';
+      img.style.zIndex = '100';
+      document.body.style.overflow = 'auto';
+      const cont = document.getElementById('another');
+      cont.style.width = '';
+      cont.style.height = '';
+      cont.style.position = '';
+      cont.style.top = '';
+      cont.style.left = '';
+      cont.style.zIndex = '';
+      cont.style.backgroundColor = '';
+      cont.style.display = '';
+      cont.style.justifyContent = '';
+      cont.style.alignItems = '';
+    }
+  };
+
   if (err) {
     return (
-      <div className="edit-page">
+      <div className="edit-page" id="carai">
         <div className="edit-body">
           <img className="edit-logo-little" alt="logo" src={juntosplus} />
           <p style={{
@@ -162,7 +218,7 @@ function Edit({
 
   if (download) {
     return (
-      <div className="edit-page">
+      <div className="edit-page" id="carai">
         <div className="edit-body">
           <img className="edit-logo-little" alt="logo" src={juntosplus} />
           <div className="edit-content">
@@ -191,41 +247,58 @@ function Edit({
   }
 
   return (
-    <div className="edit-page">
+    <div className="edit-page" id="carai">
       <div className="edit-body">
         <img className="edit-logo-little" alt="logo" src={juntosplus} />
         <div className="edit-content">
           {
             loading
-              ? <img src={loader} style={{ width: '140px' }} alt="loading" />
+              ? (
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                  <img src={loader} style={{ width: '140px' }} alt="loading" />
+                  <p>{ language === 'pt' ? 'Gerando a imagem...' : 'Generando la imagenen...' }</p>
+                </div>
+              )
               : (
                 <div className="edit-your-image-container">
-                  <div
-                    className="your-image-container"
-                    style={{
-                      backgroundImage: `url(${selectedBack.back})`,
-                      backgroundSize: 'contain',
-                      backgroundPosition: 'center',
-                      position: 'relative',
-                    }}
-                  >
-                    <div
-                      className="your-pic-container"
-                      style={{
-                        backgroundImage: `url(${croppedImageURL})`,
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center',
-                        transform: `scale(${zoom[0] / 50}) rotate(${(rotate[0] - 50) * 3.6}deg) scaleX(-1)`,
-                        left: '50%',
-                        bottom: `calc(20% + ${addTop}px)`,
-                        marginLeft: `calc(-35% + ${addRight}px)`,
+                  <div id="another" onClick={close}>
+                    { (phrase && print) ? (
+                      <p style={{
                         position: 'absolute',
-                        zIndex: '2',
-                        width: '70%',
-                        height: '60%',
+                        top: '30px',
                       }}
-                    />
-                    <img src={selectedBack.front} alt="front" className="front-part" />
+                      >
+                        {language === 'pt' ? 'Tire um print!' : 'Tome una captura de pantalla!'}
+                      </p>
+                    ) : ''}
+                    <div
+                      id="test"
+                      className="your-image-container"
+                      style={{
+                        backgroundImage: `url(${selectedBack.back})`,
+                        backgroundSize: 'contain',
+                        backgroundPosition: 'center',
+                        position: 'relative',
+                      }}
+                    >
+                      <div
+                        className="your-pic-container"
+                        style={{
+                          backgroundImage: `url(${croppedImageURL})`,
+                          backgroundSize: 'cover',
+                          backgroundPosition: 'center',
+                          transform: `scale(${zoom[0] / 50}) rotate(${(rotate[0] - 50) * 3.6}deg) scaleX(-1)`,
+                          left: '50%',
+                          bottom: `calc(20% + ${addTop}px)`,
+                          marginLeft: `calc(-35% + ${addRight}px)`,
+                          position: 'absolute',
+                          zIndex: '2',
+                          width: '70%',
+                          height: '60%',
+                        }}
+                      />
+                      <img src={selectedBack.front} alt="front" className="front-part" />
+                    </div>
                   </div>
                   <div
                     className="your-image-container-download"
