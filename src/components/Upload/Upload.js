@@ -7,6 +7,7 @@ import Webcam from 'react-webcam';
 import './styles.css';
 
 import { useNavigate } from 'react-router-dom';
+import ReactGA4 from 'react-ga4';
 import Footer from '../../layout/Footer/Footer';
 
 import camera from '../../assets/icons/camera.png';
@@ -55,6 +56,10 @@ function Upload({
   };
 
   const captureImage = React.useCallback(() => {
+    ReactGA4.send({
+      category: 'user',
+      action: 'capture_image_click',
+    });
     const screenshootBase64 = webcamRef.current.getScreenshot(); // screenshot image in base 64
     setImageBase64(screenshootBase64);
     const file = base64ToFile(screenshootBase64, 'webcam-capture.jpg', 'image/jpeg');

@@ -9,6 +9,7 @@ import React, {
 import { toJpeg } from 'html-to-image';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import ReactGA4 from 'react-ga4';
 
 import Slider from './Slider';
 
@@ -121,6 +122,10 @@ function Edit({
   };
 
   const handleContinue = useCallback(() => {
+    ReactGA4.send({
+      category: 'user',
+      action: 'finish_edit_click',
+    });
     toJpeg(exportRef.current, { cacheBust: true })
       .then((dataBase64) => {
         if (isMobile) {
@@ -135,6 +140,10 @@ function Edit({
           document.body.appendChild(link);
           link.click();
           document.body.removeChild(link);
+          ReactGA4.send({
+            category: 'user',
+            action: 'download_click_mobile',
+          });
         }
       });
   }, [exportRef]);

@@ -9,9 +9,12 @@ import {
   Route,
 } from 'react-router-dom';
 
+import ReactGA from 'react-ga4';
+
 import Main from './routes/Main/Main';
 
 function App() {
+  ReactGA.initialize('G-WR742J9FYN');
   return (
     <BrowserRouter>
       <Routes>

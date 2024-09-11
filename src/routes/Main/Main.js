@@ -1,12 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
+import ReactGA4 from 'react-ga4';
 import Welcome from '../../components/Welcome/Welcome';
 import Upload from '../../components/Upload/Upload';
 import Edit from '../../components/Edit/Edit';
 
 function Main() {
   const { step, language } = useParams();
+
+  useEffect(() => {
+    ReactGA4.send({
+      hitType: 'pageview',
+      page: window.location.pathname,
+    });
+  }, []);
 
   const [imageFile, setImageFile] = useState(null);
   const [imageBase64, setImageBase64] = useState(null);
