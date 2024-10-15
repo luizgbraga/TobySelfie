@@ -35,16 +35,20 @@ import brushWhite from '../../assets/icons/brush-white.png';
 import front1Es from '../../assets/images/mockups/spanish/front1.png';
 import front2Es from '../../assets/images/mockups/spanish/front2.png';
 import front3Es from '../../assets/images/mockups/spanish/front3.png';
+import front4Es from '../../assets/images/mockups/spanish/front4.png';
 import back1Es from '../../assets/images/mockups/spanish/back1.png';
 import back2Es from '../../assets/images/mockups/spanish/back2.png';
 import back3Es from '../../assets/images/mockups/spanish/back3.png';
+import back4Es from '../../assets/images/mockups/spanish/back4.png';
 
 import front1Pt from '../../assets/images/mockups/portuguese/front1.png';
 import front2Pt from '../../assets/images/mockups/portuguese/front2.png';
 import front3Pt from '../../assets/images/mockups/portuguese/front3.png';
+import front4Pt from '../../assets/images/mockups/portuguese/front4.png';
 import back1Pt from '../../assets/images/mockups/portuguese/back1.png';
 import back2Pt from '../../assets/images/mockups/portuguese/back2.png';
 import back3Pt from '../../assets/images/mockups/portuguese/back3.png';
+import back4Pt from '../../assets/images/mockups/portuguese/back4.png';
 
 function Edit({
   imageFile, croppedImageURL, setCroppedImageURL, loading, setLoading, language,
@@ -65,12 +69,14 @@ function Edit({
     { id: 1, front: front1Es, back: back1Es },
     { id: 2, front: front2Es, back: back2Es },
     { id: 3, front: front3Es, back: back3Es },
+    { id: 4, front: front4Es, back: back4Es },
   ];
 
   const backgroundOptionsPortuguese = [
     { id: 1, front: front1Pt, back: back1Pt },
     { id: 2, front: front2Pt, back: back2Pt },
     { id: 3, front: front3Pt, back: back3Pt },
+    { id: 4, front: front4Pt, back: back4Pt },
   ];
 
   const backgroundOptions = language === 'pt' ? backgroundOptionsPortuguese : backgroundOptionsSpanish;
